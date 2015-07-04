@@ -58,7 +58,7 @@ public class ConverterTestApplicationTests {
             update = update("allocation", ALLOCATED);
             mongoTemplate.updateMulti(query, update, MyPersistantObject.class);
         } catch (Exception e) {
-            System.err.println("failed to convert allocation");
+            System.err.println("failed to convert allocation: java.lang.IllegalArgumentException: can't serialize class converter_test.MyPersistantObject$Allocation");
         }
 
         // Update allocation from string value - succeeds
@@ -76,9 +76,6 @@ public class ConverterTestApplicationTests {
         // Check value update
         returned = mongoTemplate.findAll(MyPersistantObject.class).get(0);
         assertThat(returned.value.longValue(), is(54321L));
-
-
-
     }
 
 }
